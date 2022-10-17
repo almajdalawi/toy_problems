@@ -98,50 +98,50 @@ arr6 = [
 ]
 
 describe('customSort', () => {
-    it('Should sort the array', () => {
+    it('Sorts the array', () => {
         expect(arr.customSort()).toEqual([-1, 0, 2, 2, 4, 4, 6, 8, 9, 93]);
         expect(arr2.customSort()).toEqual([1]);
     });
-    it('Should thow error', () => {
+    it('Throws an error', () => {
         expect(arr3.customSort()).rejects.toThrow(emptyArrayError);
     });
 })
 
 describe('getFirstElement', () => {
-    it('Should return the first element of the array', () => {
+    it('Returns the first element of the array', () => {
         expect(arr5.getFirstElement()).toEqual(1);
         expect(arr4.getFirstElement()).toEqual(true);
     })
-    it('Should thow error', () => {
+    it('Throws an error', () => {
         expect(arr3.getFirstElement()).rejects.toThrow(emptyArrayError);
     })
 })
 
-describe('getFirstElement', () => {
-    it('Shuld return the last element of the array', () => {
+describe('getLastElement', () => {
+    it('Returns the last element of the array', () => {
         expect(arr5.getLastElement()).toEqual(2);
         expect(arr4.getLastElement()).toEqual('word');
     })
-    it('Should thow error', () => {
+    it('Throws an error', () => {
         expect(arr3.getLastElement()).rejects.toThrow(emptyArrayError);
     })
 })
 
-describe('getFirstElement', () => {
-    it('Should return an array of objects with the keys (value, index)', () => {
+describe('getSearchElement', () => {
+    it('Returns an array of objects with the keys (value, index)', () => {
         expect(arr5.search(2)).toEqual([{ index: 1, value: 2 }, { index: 5, value: 2 }]);
         expect(arr5.search(1)).toEqual([{ index: 0, value: 1 }]);
         expect(arr5.search('word')).toEqual([{ index: 3, value: 'word' }]);
         expect(arr2.search(1)).toEqual([{ index: 0, value: 1 }]);
     })
-    it('Should thow error', () => {
+    it('Throws an error', () => {
         expect(arr5.search('1')).rejects.toThrow('Not Found!');
         expect(arr3.search(1)).rejects.toThrow(emptyArrayError);
     })
 })
 
 describe('searchArrOfObj', () => {
-    it('Shuld return the last element of the array', () => {
+    it('Returns the last element of the array', () => {
         expect(arr6.searchArrOfObj('Year', 2022)).toEqual([
             { 'brand': 'Porsche', 'Year': 2022, 'price': 70000 }
         ]);
@@ -150,7 +150,7 @@ describe('searchArrOfObj', () => {
             { 'brand': 'BMW', 'Year': 2012, 'price': 18000 }
         ]);
     })
-    it('Should thow error', () => {
+    it('Throws an error', () => {
         expect(arr3.searchArrOfObj()).rejects.toThrow(emptyArrayError);
     })
 })
