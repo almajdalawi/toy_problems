@@ -74,7 +74,7 @@ function balancedParens(input) {
     if (char == '(' || char == '{' || char == '[') stack.push(char)
     else if (char == ')' || char == '}' || char == ']') {
 
-      if (flag && stack.isEmpty()) { console.log('aaaaaaaaaa'); { flag = false; return false } }
+      if (flag && stack.isEmpty()) { flag = false; return false }
 
       else {
         switch (true) {
