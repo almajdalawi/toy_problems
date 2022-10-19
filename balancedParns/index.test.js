@@ -105,3 +105,36 @@ function balancedParens(input) {
 
 
 
+describe('Stack', () => {
+  let stack = new Stack()
+  stack.push(5)
+  stack.push(true)
+  stack.push('abc')
+  stack.push('emad')
+  stack.pop()
+
+  let stack2 = new Stack()
+
+  it('Creates new stack, push into it, and pop from it', () => {
+    expect(stack.top.value).toEqual('abc')
+    expect(stack.top.next.value).toEqual(true)
+    expect(stack.top.next.next.value).toEqual(5)
+  })
+
+  it('Create empty stack', () => {
+    expect(stack2.top).toEqual(null)
+  })
+})
+
+
+describe('balancedParens', () => {
+  it('Checks if all the brackets in a string are closed correctly', () => {
+    expect(balancedParens('[()]')).toEqual(true)
+    expect(balancedParens('{}{abc}[123](())')).toEqual(true)
+    expect(balancedParens('[(])')).toEqual(false)
+    expect(balancedParens('[')).toEqual(false)
+    expect(balancedParens('}{')).toEqual(false)
+    expect(balancedParens(')')).toEqual(false)
+    expect(balancedParens('')).toEqual('Empty string!')
+  })
+})
