@@ -25,61 +25,24 @@
  */
 
 
-function simple(input) {
+function balancedParens(input) {
   let inputArr = input.split('')
   let char
-  let openBrackets = []
-  let closeBrackets = []
+  let tempBrackets = []
 
   if (inputArr.length < 1) return 'Empty string!'
-  if (inputArr[0] == '}' || inputArr[0] == ')' || inputArr[0] == ']') return false
+  if (inputArr[0] == '}' || inputArr[0] == ')' || inputArr[0] == ']') return false  // to reduce time complixity
 
   for (let i = 0; i < inputArr.length; i++) {
     char = inputArr[i]
 
     if (char == '{' || char == '(' || char == '[') {
-      openBrackets.push(char)
-    } else if (char == '}' || char == ')' || char == ']') {
-      closeBrackets.push(char)
-    }
-  }
-
-  if (openBrackets.length == closeBrackets.length) return true
-  else return false
-}
-
-
-function balancedParens(input) {
-  let inputArr = input.split('')
-  let char
-  let allBrackets = []
-  let tempBrackets = []
-
-  if (inputArr.length < 1) return 'Empty string!'
-
-  for (let i = 0; i < inputArr.length; i++) {
-    char = inputArr[i]
-
-    if (char == '{' || char == '(' || char == '[' || char == '}' || char == ')' || char == ']') {
-      allBrackets.push(char)
-    }
-  }
-
-  for (let i = 0; i < allBrackets.length; i++) {
-    char = allBrackets[i]
-
-    if (allBrackets[0] == ')' || allBrackets[0] == '}' || allBrackets[0] == ']') return false
-
-    if (char == '(' || char == '{' || char == '[') {
       tempBrackets.push(char)
     } else if (char == ')' || char == '}' || char == ']') {
-      if (tempBrackets.length === 0) return false
-      else {
-        if (char == ')' && tempBrackets[tempBrackets.length - 1] == '(') tempBrackets.pop()
-        else if (char == '}' && tempBrackets[tempBrackets.length - 1] == '{') tempBrackets.pop()
-        else if (char == ']' && tempBrackets[tempBrackets.length - 1] == '[') tempBrackets.pop()
-        else return false
-      }
+      if (char == ')' && tempBrackets[tempBrackets.length - 1] == '(') tempBrackets.pop()
+      else if (char == '}' && tempBrackets[tempBrackets.length - 1] == '{') tempBrackets.pop()
+      else if (char == ']' && tempBrackets[tempBrackets.length - 1] == '[') tempBrackets.pop()
+      else return false
     }
   }
 
@@ -88,9 +51,7 @@ function balancedParens(input) {
 }
 
 
-
 //////////////
-
 
 
 describe('balancedParens', () => {
@@ -101,18 +62,7 @@ describe('balancedParens', () => {
     expect(balancedParens('[')).toEqual(false)
     expect(balancedParens('}{')).toEqual(false)
     expect(balancedParens(')')).toEqual(false)
-    expect(balancedParens('')).toEqual('Empty string!')
-  })
-})
-
-describe('simple', () => {
-  it('Checks if all the allBrackets in a string are closed correctly', () => {
-    expect(balancedParens('[()]')).toEqual(true)
-    expect(balancedParens('{}{abc}[123](())')).toEqual(true)
-    expect(balancedParens('[(])')).toEqual(false)
-    expect(balancedParens('[')).toEqual(false)
-    expect(balancedParens('}{')).toEqual(false)
-    expect(balancedParens(')')).toEqual(false)
+    expect(balancedParens('([{]')).toEqual(false)
     expect(balancedParens('')).toEqual('Empty string!')
   })
 })
