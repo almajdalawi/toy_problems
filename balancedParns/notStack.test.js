@@ -25,6 +25,30 @@
  */
 
 
+function simple(input) {
+  let inputArr = input.split('')
+  let char
+  let openBrackets = []
+  let closeBrackets = []
+
+  if (inputArr.length < 1) return 'Empty string!'
+  if (inputArr[0] == '}' || inputArr[0] == ')' || inputArr[0] == ']') return false
+
+  for (let i = 0; i < inputArr.length; i++) {
+    char = inputArr[i]
+
+    if (char == '{' || char == '(' || char == '[') {
+      openBrackets.push(char)
+    } else if (char == '}' || char == ')' || char == ']') {
+      closeBrackets.puth(char)
+    }
+  }
+
+  if (openBrackets.length == closeBrackets.length) return true
+  else return false
+}
+
+
 function balancedParens(input) {
   let inputArr = input.split('')
   let char
@@ -70,6 +94,18 @@ function balancedParens(input) {
 
 
 describe('balancedParens', () => {
+  it('Checks if all the allBrackets in a string are closed correctly', () => {
+    expect(balancedParens('[()]')).toEqual(true)
+    expect(balancedParens('{}{abc}[123](())')).toEqual(true)
+    expect(balancedParens('[(])')).toEqual(false)
+    expect(balancedParens('[')).toEqual(false)
+    expect(balancedParens('}{')).toEqual(false)
+    expect(balancedParens(')')).toEqual(false)
+    expect(balancedParens('')).toEqual('Empty string!')
+  })
+})
+
+describe('simple', () => {
   it('Checks if all the allBrackets in a string are closed correctly', () => {
     expect(balancedParens('[()]')).toEqual(true)
     expect(balancedParens('{}{abc}[123](())')).toEqual(true)
