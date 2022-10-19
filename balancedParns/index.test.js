@@ -68,34 +68,25 @@ function balancedParens(input) {
   if (inputArr.length < 1) return 'Empty string!'
 
   let stack = new Stack()
-  let flag = true
-  inputArr.forEach(char => {
-    flag = true
-    if (char == '(' || char == '{' || char == '[') stack.push(char)
-    else if (char == ')' || char == '}' || char == ']') {
 
-      if (flag && stack.isEmpty()) { flag = false; return false }
+  let char
+  for (let i = 0; i < inputArr.length; i++) {
+    char = inputArr[i]
 
+    if (char == '(' || char == '{' || char == '[') {
+      stack.push(char)
+    } else if (char == ')' || char == '}' || char == ']') {
+      if (stack.isEmpty()) return false
       else {
-        switch (true) {
-          case (char == ')' && stack.top.value == '('):
-            stack.pop()
-            break
-          case (char == '}' && stack.top.value == '{'):
-            stack.pop()
-            break
-          case (char == ']' && stack.top.value == '['):
-            stack.pop()
-            break
-          default:
-            flag = false
-            return false
-        }
+        if (char == ')' && stack.top.value == '(') stack.pop()
+        else if (char == '}' && stack.top.value == '{') stack.pop()
+        else if (char == ']' && stack.top.value == '[') stack.pop()
+        else return false
       }
     }
-  })
+  }
 
-  if (flag && stack.isEmpty()) return true
+  if (stack.isEmpty()) return true
   else return false
 }
 
