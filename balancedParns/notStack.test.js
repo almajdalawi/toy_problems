@@ -40,7 +40,7 @@ function simple(input) {
     if (char == '{' || char == '(' || char == '[') {
       openBrackets.push(char)
     } else if (char == '}' || char == ')' || char == ']') {
-      closeBrackets.puth(char)
+      closeBrackets.push(char)
     }
   }
 
