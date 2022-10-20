@@ -8,7 +8,19 @@
  */
 
 const bitCounting = (num) => {
-  let binary = num.toString(2)
+  // let binary = num.toString(2)
+
+  let reveresdBinary = []
+  while (num > 0) {
+    reveresdBinary.push(num % 2)
+    num = Math.floor(num / 2);
+  }
+
+  // binary = reveresdBinary.reverse()
+  let binary = []
+  for (let i = reveresdBinary.length - 1; i >= 0; i--) {
+    binary.push(reveresdBinary[i])
+  }
 
   counter = 0
   for (let i = 0; i < binary.length; i++) {
@@ -18,12 +30,13 @@ const bitCounting = (num) => {
   return counter
 };
 
+console.log(bitCounting(10))
 
 ///////////
 
 
 describe('bitCounting', () => {
-  it('Checks the number of bits in the binary representative of a number', () => {
+  it('checks the number of bits in the binary representative of a number', () => {
     expect(bitCounting(1234)).toEqual(5)
     expect(bitCounting(0)).toEqual(0)
     expect(bitCounting(1)).toEqual(1)
