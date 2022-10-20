@@ -39,28 +39,29 @@
 
 
 const allAnagrams = function (string) {
-  let arraySrt = string.split("");
+  let arraySrt = string.split("")
   let uniqeStr = []
   arraySrt.forEach(element => {
-    if (!uniqeStr.includes(element)) uniqeStr.push(element)
+    if (!uniqeStr.includes(element)) { uniqeStr.push(element) }
   })
 
-  let anagrams = [];
+  let anagrams = []
 
   const word = (arr) => {
     if (arr.length === uniqeStr.length) {
-      anagrams.push(arr.join(""));
-      return;
+      anagrams.push(arr.join(""))
+
+      return
     }
+
     uniqeStr.forEach((element) => {
-      if (arr.indexOf(element) === -1) {
-        word(arr.concat(element));
-      }
+      if (arr.indexOf(element) === -1) { word(arr.concat(element)) }
     });
   };
 
   word([]);
-  return anagrams;
+
+  return anagrams
 };
 
 
@@ -68,7 +69,7 @@ const allAnagrams = function (string) {
 
 
 describe('allAnagrams', () => {
-  it('Returnts all possible anagrams using the unique characters', () => {
+  it('returnts all possible anagrams using the unique characters', () => {
     expect(allAnagrams('abc')).toEqual(['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
     expect(allAnagrams('abca')).toEqual(['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
     expect(allAnagrams('abcd')).toEqual([
