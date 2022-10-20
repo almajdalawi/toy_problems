@@ -18,28 +18,47 @@ const bitCounting = (num) => {
 
   // binary = reveresdBinary.reverse()
   let binary = []
+  counter = 0
   for (let i = reveresdBinary.length - 1; i >= 0; i--) {
     binary.push(reveresdBinary[i])
-  }
-
-  counter = 0
-  for (let i = 0; i < binary.length; i++) {
-    if (binary[i] == 1) { counter++ }
+    if (reveresdBinary[i]) { counter++ }
   }
 
   return counter
 };
 
-console.log(bitCounting(10))
+
+function binaryToDeci(binary) {
+  let binaryArr = binary.split('')
+  reveresdBinary = binaryArr.reverse()
+
+  deci = 0
+  for (let i = 0; i < reveresdBinary.length; i++) {
+    if (reveresdBinary[i] == 1) { deci += Math.pow(2, i) }
+  }
+
+  return deci
+}
+
 
 ///////////
 
 
 describe('bitCounting', () => {
-  it('checks the number of bits in the binary representative of a number', () => {
+  it('converts the decimil number to a binary number then returns the number of bits in the binary representative of a number', () => {
     expect(bitCounting(1234)).toEqual(5)
     expect(bitCounting(0)).toEqual(0)
     expect(bitCounting(1)).toEqual(1)
     expect(bitCounting(3)).toEqual(2)
+  })
+})
+
+describe('binaryToDeci', () => {
+  it('converts the binary number to a decimil number', () => {
+    expect(binaryToDeci('10011010010')).toEqual(1234)
+    expect(binaryToDeci('1001100000010010')).toEqual(38930)
+    expect(binaryToDeci('0')).toEqual(0)
+    expect(binaryToDeci('1')).toEqual(1)
+    expect(binaryToDeci('11')).toEqual(3)
   })
 })
