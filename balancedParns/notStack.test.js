@@ -46,8 +46,7 @@ function balancedParens(input) {
     }
   }
 
-  if (tempBrackets.length === 0) return true
-  else return false
+  return !!!tempBrackets.length
 }
 
 
