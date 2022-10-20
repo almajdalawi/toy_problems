@@ -8,5 +8,12 @@
  */
 
 const bitCounting = (num) => {
-  // TODO
+  let binary = num.toString(2)
+
+  counter = 0
+  for (let i = 0; i < binary.length; i++) {
+    if (binary[i] == 1) { counter++ }
+  }
+
+  return counter
 };
