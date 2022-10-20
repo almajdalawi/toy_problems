@@ -44,7 +44,7 @@ class Stack {
   }
 
   push(newValue) {
-    if (newValue instanceof Node) return 'Please enter a value and it will converted to Node automaticly'
+    if (newValue instanceof Node) { return 'Please enter a value and it will converted to Node automaticly' }
 
     let newNode = new Node(newValue)
     newNode.next = this.top
@@ -52,7 +52,7 @@ class Stack {
   }
 
   pop() {
-    if (this.isEmpty()) return 'The stack is empty!'
+    if (this.isEmpty()) { return 'The stack is empty!' }
 
     let oldTop = this.top
     this.top = this.top.next
@@ -65,7 +65,7 @@ class Stack {
 
 function balancedParens(input) {
   let inputArr = input.split('')
-  if (inputArr.length < 1) return 'Empty string!'
+  if (inputArr.length < 1) { return 'Empty string!' }
 
   let stack = new Stack()
 
@@ -76,12 +76,12 @@ function balancedParens(input) {
     if (char == '(' || char == '{' || char == '[') {
       stack.push(char)
     } else if (char == ')' || char == '}' || char == ']') {
-      if (stack.isEmpty()) return false
+      if (stack.isEmpty()) { return false }
       else {
-        if (char == ')' && stack.top.value == '(') stack.pop()
-        else if (char == '}' && stack.top.value == '{') stack.pop()
-        else if (char == ']' && stack.top.value == '[') stack.pop()
-        else return false
+        if (char == ')' && stack.top.value == '(') { stack.pop() }
+        else if (char == '}' && stack.top.value == '{') { stack.pop() }
+        else if (char == ']' && stack.top.value == '[') { stack.pop() }
+        else { return false }
       }
     }
   }
