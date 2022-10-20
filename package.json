@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mmasaid/toy_problems.git"
+    "url": "git+https://github.com/almajdalawi/toy_problems.git"
   },
-  "author": "maltobasi@hotmail.com",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mmasaid/toy_problems/issues"
+    "url": "git+https://github.com/almajdalawi/toy_problems/issues"
   },
-  "homepage": "https://github.com/mmasaid/toy_problems#readme",
+  "homepage": "git+https://github.com/almajdalawi/toy_problems#readme",
   "dependencies": {
     "jest": "^27.1.0"
   },
