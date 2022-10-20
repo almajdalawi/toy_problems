@@ -17,3 +17,16 @@ const bitCounting = (num) => {
 
   return counter
 };
+
+
+///////////
+
+
+describe('bitCounting', () => {
+  it('Checks the number of bits in the binary representative of a number', () => {
+    expect(bitCounting(1234)).toEqual(5)
+    expect(bitCounting(0)).toEqual(0)
+    expect(bitCounting(1)).toEqual(1)
+    expect(bitCounting(3)).toEqual(2)
+  })
+})
