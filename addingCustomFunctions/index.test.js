@@ -33,21 +33,21 @@ Array.prototype.customSort = function () {
 
 
 Array.prototype.getFirstElement = function () {
-    if (!this[0]) return Promise.reject(new Error(emptyArrayError))
+    if (!this.length) return Promise.reject(new Error(emptyArrayError))
 
     return this[0]
 }
 
 
 Array.prototype.getLastElement = function () {
-    if (!this[0]) return Promise.reject(new Error(emptyArrayError))
+    if (!this.lingth) return Promise.reject(new Error(emptyArrayError))
 
     return this[this.length - 1]
 }
 
 
 Array.prototype.search = function (wanted) {
-    if (this.length == 0) return Promise.reject(new Error(emptyArrayError))
+    if (!this.length) return Promise.reject(new Error(emptyArrayError))
 
     let allResults = []
     this.forEach((element, index) => {
@@ -59,12 +59,12 @@ Array.prototype.search = function (wanted) {
         }
     })
 
-    if (allResults.length == 0) return Promise.reject(new Error('Not Found!'))
+    if (!allResults.length) return Promise.reject(new Error('Not Found!'))
     else return allResults
 }
 
 Array.prototype.searchArrOfObj = function (key, value) {
-    if (this.length == 0) return Promise.reject(new Error(emptyArrayError))
+    if (!this.length) return Promise.reject(new Error(emptyArrayError))
 
     let allResults = []
     this.forEach((element) => {
@@ -73,7 +73,7 @@ Array.prototype.searchArrOfObj = function (key, value) {
         }
     })
 
-    if (allResults.length == 0) return Promise.reject(new Error('Not Found!'))
+    if (!allResults.length) return Promise.reject(new Error('Not Found!'))
     else return allResults
 }
 
@@ -82,7 +82,6 @@ Array.prototype.searchArrOfObj = function (key, value) {
 ///////////////////////////////////
 
 
-// console.log(arr.__proto__)
 
 arr = [2, 6, 8, 4, 9, 2, 0, 4, 93, - 1]
 arr2 = [1]
@@ -98,50 +97,50 @@ arr6 = [
 ]
 
 describe('customSort', () => {
-    it('Sorts the array', () => {
+    it('sorts the array', () => {
         expect(arr.customSort()).toEqual([-1, 0, 2, 2, 4, 4, 6, 8, 9, 93]);
         expect(arr2.customSort()).toEqual([1]);
     });
-    it('Throws an error', () => {
+    it('throws an error', () => {
         expect(arr3.customSort()).rejects.toThrow(emptyArrayError);
     });
 })
 
 describe('getFirstElement', () => {
-    it('Returns the first element of the array', () => {
+    it('returns the first element of the array', () => {
         expect(arr5.getFirstElement()).toEqual(1);
         expect(arr4.getFirstElement()).toEqual(true);
     })
-    it('Throws an error', () => {
+    it('throws an error', () => {
         expect(arr3.getFirstElement()).rejects.toThrow(emptyArrayError);
     })
 })
 
 describe('getLastElement', () => {
-    it('Returns the last element of the array', () => {
+    it('returns the last element of the array', () => {
         expect(arr5.getLastElement()).toEqual(2);
         expect(arr4.getLastElement()).toEqual('word');
     })
-    it('Throws an error', () => {
+    it('throws an error', () => {
         expect(arr3.getLastElement()).rejects.toThrow(emptyArrayError);
     })
 })
 
 describe('getSearchElement', () => {
-    it('Returns an array of objects with the keys (value, index)', () => {
+    it('returns an array of objects with the keys (value, index)', () => {
         expect(arr5.search(2)).toEqual([{ index: 1, value: 2 }, { index: 5, value: 2 }]);
         expect(arr5.search(1)).toEqual([{ index: 0, value: 1 }]);
         expect(arr5.search('word')).toEqual([{ index: 3, value: 'word' }]);
         expect(arr2.search(1)).toEqual([{ index: 0, value: 1 }]);
     })
-    it('Throws an error', () => {
+    it('throws an error', () => {
         expect(arr5.search('1')).rejects.toThrow('Not Found!');
         expect(arr3.search(1)).rejects.toThrow(emptyArrayError);
     })
 })
 
 describe('searchArrOfObj', () => {
-    it('Returns the last element of the array', () => {
+    it('returns the last element of the array', () => {
         expect(arr6.searchArrOfObj('Year', 2022)).toEqual([
             { 'brand': 'Porsche', 'Year': 2022, 'price': 70000 }
         ]);
@@ -150,7 +149,7 @@ describe('searchArrOfObj', () => {
             { 'brand': 'BMW', 'Year': 2012, 'price': 18000 }
         ]);
     })
-    it('Throws an error', () => {
+    it('throws an error', () => {
         expect(arr3.searchArrOfObj()).rejects.toThrow(emptyArrayError);
     })
 })
