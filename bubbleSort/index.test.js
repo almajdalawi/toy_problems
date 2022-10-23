@@ -36,19 +36,27 @@ const a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
 // Feel free to add helper functions if needed
 
 Array.prototype.customSwap = function (a, b) {
+    let isSwaped
     let temp
     if (this[a] > this[b]) {
         temp = this[a]
         this[a] = this[b]
         this[b] = temp
+        isSwaped = true
     }
+    else isSwaped = false
+    return isSwaped
 }
 
 const bubbleSort = (array) => {
+    let isSwaped
+    let counter = 0
     for (let i = 0; i < array.length - 1; i++) {
         for (let j = 0; j < array.length - i - 1; j++) {
-            array.customSwap(j, j + 1)
+            isSwaped = array.customSwap(j, j + 1)
+            if (!isSwaped) { counter++ }
         }
+        if (counter == array.length - 1) { return array }  // to reduce time if the array is already sorted
     }
     return array
 };
