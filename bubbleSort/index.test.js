@@ -35,12 +35,30 @@ const a = [34, 203, 3, 746, 200, 984, 198, 764, 9];
 
 // Feel free to add helper functions if needed
 
+Array.prototype.customSwap = function (a, b) {
+    let temp
+    if (this[a] > this[b]) {
+        temp = this[a]
+        this[a] = this[b]
+        this[b] = temp
+    }
+}
+
 const bubbleSort = (array) => {
-    let n = array.length
-    let temp = []
-    for (let i = 0; i < n - 1; i++) {
+    for (let i = 0; i < array.length - 1; i++) {
+        for (let j = 0; j < array.length - i - 1; j++) {
+            array.customSwap(j, j + 1)
+        }
+    }
+    return array
+};
+
+
+const bubbleSort2 = (array) => {
+    let temp
+    for (let i = 0; i < array.length - 1; i++) {
         let counter = 0
-        for (let j = 0; j < n - i - 1; j++) {
+        for (let j = 0; j < array.length - i - 1; j++) {
             if (array[j] > array[j + 1]) {
                 temp = array[j]
                 array[j] = array[j + 1]
@@ -52,7 +70,6 @@ const bubbleSort = (array) => {
     }
     return array
 };
-
 
 ///////////////
 
