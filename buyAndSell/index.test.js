@@ -27,13 +27,19 @@ function getMinOfArray(numArray) {
 }
 
 const maximumProfit = function (array) {
-  let max = 0
-  for (let i = 0; i < array.length; i++) {
-    for (let j = i; j < array.length; j++) {
-      if (array[j] - array[i] > max) { max = array[j] - array[i] }
+  let min = getMinOfArray(array)
+  let max = getMaxOfArray(array)
+  if (array.indexOf(max) > array.indexOf(min)) {
+    return max - min
+  } else {
+    max = 0
+    for (let i = 0; i < array.length; i++) {
+      for (let j = i; j < array.length; j++) {
+        if (array[j] - array[i] > max) { max = array[j] - array[i] }
+      }
     }
+    return max
   }
-  return max
 };
 
 
@@ -46,5 +52,6 @@ describe('maximumProfit', () => {
     expect(maximumProfit([100, 80, 70, 65, 60, 55, 50])).toEqual(0)
     expect(maximumProfit([100, 180, 70, 65, 60, 55, 50])).toEqual(80)
     expect(maximumProfit([70, 65, 60, 55, 60, -100, -180])).toEqual(5)
+    expect(maximumProfit([20, 50, 80, 100])).toEqual(80)
   })
 })
