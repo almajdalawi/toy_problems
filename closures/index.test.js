@@ -36,3 +36,34 @@ function pingPongTracker() {
 
   return { timeSpentPlaying, playOneGame, myLevel }
 }
+
+
+///////////////
+
+
+describe('pingPongTracker', () => {
+  let myGame = new pingPongTracker()
+  let myGame2 = new pingPongTracker()
+  it('plays one game many times', () => {
+    expect(myGame.playOneGame()).toEqual('Game played')
+    expect(myGame.playOneGame()).toEqual('Game played')
+  })
+
+  it('checks the playing time', () => {
+    expect(myGame.timeSpentPlaying()).toEqual(30)
+  })
+
+  it('returns the level of the player', () => {
+    expect(myGame2.myLevel()).toEqual('I need to improve my game')
+    myGame2.playOneGame()
+    myGame2.playOneGame()
+    expect(myGame2.myLevel()).toEqual('You need to improve your game')
+    myGame2.playOneGame()
+    myGame2.playOneGame()
+    myGame2.playOneGame()
+    myGame2.playOneGame()
+    myGame2.playOneGame()
+    myGame2.playOneGame()
+    expect(myGame2.myLevel()).toEqual('Wow, I have wasted a lot of time')
+  })
+})
