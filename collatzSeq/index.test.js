@@ -40,3 +40,29 @@ function collatzSeq(number) {
 
     return result
 }
+
+
+// Recarsion solution
+function collatz(num) {
+    let result = []
+    result.push(num)
+    recurse(num)
+
+    function recurse(num) {
+        if (num == 1) {
+            result.push(num)
+            return result
+        } else {
+            if (num % 2 != 0) {
+                num = 3 * num + 1
+                result.push(num)
+                return recurse(num)
+            } else {
+                num = parseInt(num / 2)
+                result.push(num)
+                return recurse(num)
+            }
+        }
+    }
+    return result
+}
