@@ -23,6 +23,20 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
  * Write the unit tests that cover your solution
  */
 
+
+// Loop solution
 function collatzSeq(number) {
-// TO DO
+    let result = []
+    while (number != 1) {
+        result.push(number)
+
+        if (number % 2 != 0) {
+            number = 3 * number + 1
+        } else
+            number = parseInt(number / 2)
+    }
+
+    result.push(number)
+
+    return result
 }
