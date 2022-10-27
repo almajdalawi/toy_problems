@@ -11,20 +11,50 @@
  */
 
 const commonCharacters = (str1, str2) => {
-  result = ''
-  set = new Set()
-  arr1 = str1.split('')
-  arr2 = str2.split('')
+  let result = ''
+  let setOfCharStr2 = new Set()
+  let arrOfCharStr1 = str1.split('')
+  let arrOfCharStr2 = str2.split('')
 
-  arr2.forEach(char => {
-    set.add(char)
+  arrOfCharStr2.forEach(char => {
+    setOfCharStr2.add(char)
   });
 
-  arr1.forEach(char => {
-    if (set.has(char)) { result += char }
+  arrOfCharStr1.forEach(char => {
+    if (setOfCharStr2.has(char)) { result += char }
+  })
+
+  return result
+};
+
+
+const commonCharactersManyStrings = (str1, ...args) => {
+  let result = ''
+  let arrayOfSets = []
+  let arrOfCharStr1 = str1.split('')
+  let unique
+
+  for (let i = 0; i < args.length; i++) {
+    unique = new Set()
+    arrayOfChar = args[i].split('')
+
+    arrayOfChar.forEach(char => {
+      unique.add(char)
+    });
+    arrayOfSets.push(unique)
+  }
+
+  arrOfCharStr1.forEach(char => {
+    let isCommon = true
+    for (let i = 0; i < arrayOfSets.length; i++) {
+      if (!arrayOfSets[i].has(char)) { isCommon = false }
+    }
+    if (isCommon) { result += char }
   })
 
   return result
 };
 
 console.log(commonCharacters('acexivou', 'aegihobu'))
+
+console.log(commonCharactersManyStrings('acexivou', 'aegihobu'))
