@@ -11,5 +11,63 @@
  */
 
 const commonCharacters = (str1, str2) => {
-  // TODO
+  let result = ''
+  let setOfCharStr2 = new Set()
+  let arrOfCharStr1 = str1.split('')
+  let arrOfCharStr2 = str2.split('')
+
+  arrOfCharStr2.forEach(char => {
+    setOfCharStr2.add(char)
+  });
+
+  arrOfCharStr1.forEach(char => {
+    if (setOfCharStr2.has(char)) { result += char }
+  })
+
+  return result
 };
+
+
+const commonCharactersManyStrings = (str1, ...args) => {
+  let result = ''
+  let arrayOfSets = []
+  let arrOfCharStr1 = str1.split('')
+  let unique
+
+  for (let i = 0; i < args.length; i++) {
+    unique = new Set()
+    arrayOfChar = args[i].split('')
+
+    arrayOfChar.forEach(char => {
+      unique.add(char)
+    });
+    arrayOfSets.push(unique)
+  }
+
+  arrOfCharStr1.forEach(char => {
+    let isCommon = true
+    for (let i = 0; i < arrayOfSets.length; i++) {
+      if (!arrayOfSets[i].has(char)) { isCommon = false }
+    }
+    if (isCommon) { result += char }
+  })
+
+  return result
+};
+
+
+/////////////////
+
+
+describe('commonCharacters', () => {
+  it('returns the common characters of the given args', () => {
+    expect(commonCharacters('acexivou', 'aegihobu')).toEqual('aeiou')
+    expect(commonCharactersManyStrings('acexivou', 'aegihobu')).toEqual('aeiou')
+
+    expect(commonCharacters('abcd', 'ba')).toEqual('ab')
+    expect(commonCharactersManyStrings('abcd', 'ba')).toEqual('ab')
+
+    expect(commonCharactersManyStrings('abcd', 'bac', 'a')).toEqual('a')
+    expect(commonCharactersManyStrings('acexivou', 'aegihobu', 'ea')).toEqual('ae')
+  })
+})
