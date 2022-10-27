@@ -12,12 +12,18 @@
 
 const commonCharacters = (str1, str2) => {
   result = ''
+  set = new Set()
   arr1 = str1.split('')
   arr2 = str2.split('')
 
-  arr1.forEach(char => {
-    if (arr2.includes(char) && !result.includes(char)) { result += char }
+  arr2.forEach(char => {
+    set.add(char)
   });
+
+  arr1.forEach(char => {
+    if (set.has(char)) { result += char }
+  })
+
   return result
 };
 
