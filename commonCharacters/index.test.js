@@ -55,6 +55,19 @@ const commonCharactersManyStrings = (str1, ...args) => {
   return result
 };
 
-console.log(commonCharacters('acexivou', 'aegihobu'))
 
-console.log(commonCharactersManyStrings('acexivou', 'aegihobu'))
+/////////////////
+
+
+describe('commonCharacters', () => {
+  it('returns the common characters of the given args', () => {
+    expect(commonCharacters('acexivou', 'aegihobu')).toEqual('aeiou')
+    expect(commonCharactersManyStrings('acexivou', 'aegihobu')).toEqual('aeiou')
+
+    expect(commonCharacters('abcd', 'ba')).toEqual('ab')
+    expect(commonCharactersManyStrings('abcd', 'ba')).toEqual('ab')
+
+    expect(commonCharactersManyStrings('abcd', 'bac', 'a')).toEqual('a')
+    expect(commonCharactersManyStrings('acexivou', 'aegihobu', 'ea')).toEqual('ae')
+  })
+})
