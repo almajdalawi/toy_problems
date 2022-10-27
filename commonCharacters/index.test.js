@@ -11,5 +11,14 @@
  */
 
 const commonCharacters = (str1, str2) => {
-  // TODO
+  result = ''
+  arr1 = str1.split('')
+  arr2 = str2.split('')
+
+  arr1.forEach(char => {
+    if (arr2.includes(char) && !result.includes(char)) { result += char }
+  });
+  return result
 };
+
+console.log(commonCharacters('acexivou', 'aegihobu'))
