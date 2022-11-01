@@ -34,17 +34,11 @@
  */
 
 
-var greet = function (name) { return 'hello ' + name; }
-var exclaim = function (statement) { return statement.toUpperCase() + '!'; }
-var abc = function (x) { return 'hi ' + x }
-var xyz = function (x) { return 'second ' + x }
-
-
 
 function compose(...args) {
-  return x
+  return internalFunc
 
-  function x(str) {
+  function internalFunc(str) {
     let func1
     let func2
     for (let i = args.length - 1; i >= 0; i -= 2) {
@@ -69,9 +63,9 @@ function compose(...args) {
 }
 
 function pipe(...args) {
-  return x
+  return internalFunc
 
-  function x(str) {
+  function internalFunc(str) {
     let func1
     let func2
     for (let i = 0; i < args.length; i += 2) {
@@ -95,5 +89,34 @@ function pipe(...args) {
   }
 }
 
-console.log(compose(greet, exclaim, abc, xyz)('emad'))
-console.log(pipe(greet, exclaim, abc, xyz)('emad'))
+
+//////////////////
+
+
+describe('compose', () => {
+  var greet = function (name) { return 'hello ' + name; }
+  var exclaim = function (statement) { return statement.toUpperCase() + '!'; }
+  var abc = function (x) { return 'hi ' + x }
+  var xyz = function (x) { return 'second ' + x }
+
+  it('compose multiple functions', () => {
+    expect(compose(greet, exclaim, abc, xyz)('emad')).toEqual('hello HI SECOND EMAD!')
+    expect(compose(greet, exclaim, abc)('emad')).toEqual('hello HI EMAD!')
+    expect(compose(greet, exclaim)('emad')).toEqual('hello EMAD!')
+    expect(compose(greet)('emad')).toEqual('hello emad')
+  })
+})
+
+describe('pipe', () => {
+  var greet = function (name) { return 'hello ' + name; }
+  var exclaim = function (statement) { return statement.toUpperCase() + '!'; }
+  var abc = function (x) { return 'hi ' + x }
+  var xyz = function (x) { return 'second ' + x }
+
+  it('compose multiple functions', () => {
+    expect(pipe(greet, exclaim, abc, xyz)('emad')).toEqual('second hi HELLO EMAD!')
+    expect(pipe(greet, exclaim, abc)('emad')).toEqual('hi HELLO EMAD!')
+    expect(pipe(greet, exclaim)('emad')).toEqual('HELLO EMAD!')
+    expect(pipe(greet)('emad')).toEqual('hello emad')
+  })
+})
