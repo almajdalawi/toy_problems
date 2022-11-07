@@ -8,8 +8,12 @@ of calling the callback function.
 See example usage to understand what arguments are passed to the callback.
 */
 
-Array.prototype.map = function(callback) {
-
+Array.prototype.map = function (callback) {
+  newArray = [];
+  for (let i = 0; i < this.length; i++) {
+    newArray.push(callback(this[i], i, this)); // callback taks (this[i], i, this) in map and any iterative function (every, some, filter, forEach, sort) 
+  }                                            // the index and the array are optinal arguments.
+  return newArray;
 };
 
 /*
@@ -19,6 +23,17 @@ var transform = function(element,index,array){
 };
 ["a","b","c"].map(transform); //should return ['a0a','b1b','c2c'];
 */
+
+describe('Array.map', () => {
+  var transform = function (element, index, array) {
+    return array[index] + index + element;
+  };
+
+  it('should be a function', () => {
+    expect(["a", "b", "c"].map(transform)).toEqual(['a0a', 'b1b', 'c2c']);
+  });
+});
+
 
 
 /*
@@ -31,15 +46,21 @@ with the error message - a simple string that says "Incorrect argument(s)".
 Please see example usage to understand what should be passed to the callback.
 */
 
-const asyncSum = function(a, b, callback) {
-
+const asyncSum = function (a, b, callback) {
+  setTimeout(() => {
+    if (typeof a !== 'number' || typeof b !== 'number') {
+      callback(null, 'Incorrect argument(s)');
+    } else {
+      callback(a + b, null);
+    }
+  }, 1000);
 };
 
 /*
 Example use:
 */
 
-const logNumber = function(error, number) {
+const logNumber = function (error, number) {
   if (error) {
     console.log('Error: ', error);
   } else {
@@ -52,6 +73,21 @@ asyncSum(10,7,logNumber);//should print "The total is: 17" after 1 second
 asyncSum(10,"B",logNumber);
 //should print "Error: Incorrect argument(s)" after 1 second
 */
+
+describe('asyncSum', () => {
+  it('returns the sum of two numbers', () => {
+    asyncSum(10, 7, (sum, err) => {
+      expect(err).toBe(null);
+      expect(sum).toEqual(17);
+    });
+  });
+  it('returns an error if one of the arguments is not a number', () => {
+    asyncSum(10, 'B', (sum, err) => {
+      expect(err).toEqual('Incorrect argument(s)');
+      expect(sum).toBe(null);
+    });
+  });
+});
 
 
 /*
